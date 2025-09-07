@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      color: #111827;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 4rem;
+      border-top: 6px solid cornflowerblue;
+      font-size: 1.2rem;
+    }
+
+    .logo {
+      border: 2px solid #111827;
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 700;
+      color: #111827;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: cornflowerblue;
+    }
+
+    .contact-btn {
+      border: 2px solid #111827;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      text-decoration: none;
+      color: #111827;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .contact-btn:hover {
+      background: cornflowerblue;
+      color: white;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 2rem;
+    }
+
+    .tab-btn {
+      padding: 1rem 2rem;
+      border: none;
+      background: #e5e7eb;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .tab-btn.active {
+      background: cornflowerblue;
+      color: white;
+    }
+
+    /* Tab content */
+    .tab-content {
+      display: none;
+      max-width: 1000px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Gallery with square previews */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .img-container {
+      width: 100%;
+      padding-top: 100%; /* makes it square */
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .img-container img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* fills square, crops if needed */
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .img-container img:hover {
+      transform: scale(1.03);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2.5rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Disclaimer */
+    footer.disclaimer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+      margin: 3rem 0;
+    }
+    #bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* behind all content */
+  }
+  </style>
+</head>
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">VM</div>
+    <div class="nav-links">
+        <a href="projects.html">Projects</a>
+        <a href="Portofolio.html">Home</a>
+    </div>
+    <a href="ContactMe.html" class="contact-btn">Contact Me</a>
+  </nav>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('renders', event)">3D Renders</button>
+    <button class="tab-btn" onclick="showTab('game', event)">Coming Soon</button>
+  </div>
+
+  <!-- Tab content -->
+  <div id="renders" class="tab-content active">
+    <h2>3D Render Gallery</h2>
+    <div class="gallery">
+      <div class="img-container"><img src="Render 1.jpg" alt="3D Render 1" onclick="openLightbox(this.src)"></div>
+      <div class="img-container"><img src="Render 2.jpg" alt="3D Render 2" onclick="openLightbox(this.src)"></div>
+      <div class="img-container"><img src="Render 3.jpg" alt="3D Render 3" onclick="openLightbox(this.src)"></div>
+      <div class="img-container"><img src="Render 4.jpg" alt="3D Render 4" onclick="openLightbox(this.src)"></div>
+      <div class="img-container"><img src="Render 5.jpg" alt="3D Render 5" onclick="openLightbox(this.src)"></div>
+      <div class="img-container"><img src="Render6.jpeg" alt="3D Render 6" onclick="openLightbox(this.src)"></div>
+    </div>
+  </div>
+
+  <div id="game" class="tab-content">
+    <h2>Coming Soon</h2>
+
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="">
+  </div>
+
+  <!-- Disclaimer -->
+  <footer class="disclaimer">
+    <p>The characters(and certain assets) used in my renders were not created by me and belong to their respective owners.</p>
+  </footer>
+
+  <script>
+    // Tabs
+    function showTab(tabId, event) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox').style.display = 'flex';
+      document.getElementById('lightbox-img').src = src;
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+
+    //Bg
+        // Get the canvas and context
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+// Resize canvas to full window
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Shape class
+class Shape {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = 20 + Math.random() * 50; // size of shape
+    this.dx = (Math.random() - 0.5) * 0.3; // horizontal speed
+    this.dy = (Math.random() - 0.5) * 0.3; // vertical speed
+    // Portfolio color palette
+    const colors = [
+      "rgba(100,149,237,0.3)", // cornflowerblue
+      "rgba(16,185,129,0.3)",  // green
+      "rgba(255,165,0,0.2)"    // subtle orange
+    ];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    // Wrap around screen edges
+    if(this.x - this.radius > canvas.width) this.x = -this.radius;
+    if(this.x + this.radius < 0) this.x = canvas.width + this.radius;
+    if(this.y - this.radius > canvas.height) this.y = -this.radius;
+    if(this.y + this.radius < 0) this.y = canvas.height + this.radius;
+
+    this.draw();
+  }
+}
+
+// Create multiple shapes
+const shapes = [];
+for(let i = 0; i < 15; i++) {
+  shapes.push(new Shape());
+}
+
+// Animation loop
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  shapes.forEach(shape => shape.update());
+  requestAnimationFrame(animate);
+}
+
+animate();
+  </script>
+</body>
+</html>

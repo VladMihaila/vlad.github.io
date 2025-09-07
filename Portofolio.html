@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Portofolio.css">
+</head>
+  
+<body>
+    <canvas id="bgCanvas"></canvas>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">VM</div>
+    <div class="nav-links">
+      <a href="projects.html">Projects</a>
+      <a href="Portofolio.html">Home</a>
+    </div>
+    <a href="ContactMe.html" class="contact-btn">Contact Me</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="logoBig">VM</div>
+    <h1>
+      Hey, I'm <span class="highlight">Vlad Mihăilă.</span> Here, you can check out what I'm working on. 
+      
+    </h1>
+  </section>
+
+
+</body>
+<footer>
+    <p style="padding-left: 50px;">© 2025 Vlad Mihăilă</p>
+    <div class="social-links">
+      <a href="https://instagram.com/epava_miguel" target="_blank">Instagram</a>
+      <a href="https://discord.com/users/.cipthecip." target="_blank">Discord</a>
+    </div>
+  </footer>
+<script>
+    // Get the canvas and context
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+
+// Resize canvas to full window
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+// Shape class
+class Shape {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = 20 + Math.random() * 50; // size of shape
+    this.dx = (Math.random() - 0.5) * 0.3; // horizontal speed
+    this.dy = (Math.random() - 0.5) * 0.3; // vertical speed
+    // Portfolio color palette
+    const colors = [
+      "rgba(100,149,237,0.3)", // cornflowerblue
+      "rgba(16,185,129,0.3)",  // green
+      "rgba(255,165,0,0.2)"    // subtle orange
+    ];
+    this.color = colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
+
+  update() {
+    this.x += this.dx;
+    this.y += this.dy;
+
+    // Wrap around screen edges
+    if(this.x - this.radius > canvas.width) this.x = -this.radius;
+    if(this.x + this.radius < 0) this.x = canvas.width + this.radius;
+    if(this.y - this.radius > canvas.height) this.y = -this.radius;
+    if(this.y + this.radius < 0) this.y = canvas.height + this.radius;
+
+    this.draw();
+  }
+}
+
+// Create multiple shapes
+const shapes = [];
+for(let i = 0; i < 15; i++) {
+  shapes.push(new Shape());
+}
+
+// Animation loop
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  shapes.forEach(shape => shape.update());
+  requestAnimationFrame(animate);
+}
+
+animate();
+</script>
+</html>
